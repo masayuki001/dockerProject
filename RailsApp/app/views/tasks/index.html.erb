@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>ToDo App</title>
+  <title>Rails</title>
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
 <header>
   <nav class="my-navbar">
-    <a class="my-navbar-brand" href="/">ToDo App</a>
+    <a class="my-navbar-brand" href="/">Rails</a>
   </nav>
 </header>
 <main>
@@ -25,7 +25,9 @@
             </a>
           </div>
           <div class="list-group">
-
+            <% @folders.each do |folder| %>
+              <%= link_to folder.title, folder, {class: "list-group-item #{ @current_folder.id == folder.id ? 'active' : '' }"} %>
+            <% end %>
           </div>
         </nav>
       </div>

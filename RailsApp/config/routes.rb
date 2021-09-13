@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   root "articles#index"
 
   resources :articles
-  resources :tasks
-
+  resources :folders do
+    resources :tasks
+  end
 
   #get "/articles", to: "articles#index"
   #get "/articles/:id", to: "articles#show"
