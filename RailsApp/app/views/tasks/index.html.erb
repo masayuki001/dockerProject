@@ -26,13 +26,42 @@
           </div>
           <div class="list-group">
             <% @folders.each do |folder| %>
-              <%= link_to folder.title, folder, {class: "list-group-item #{ @current_folder.id == folder.id ? 'active' : '' }"} %>
+              <%= link_to folder.title, folder_tasks_path(folder), {class: "list-group-item #{ @current_folder.id == folder.id ? 'active' : '' }"} %>
             <% end %>
           </div>
         </nav>
       </div>
       <div class="column col-md-8">
-        <!-- ここにタスクが表示される -->
+        <div class="panel panel-default">
+          <div class="panel-heading">タスク</div>
+          <div class="panel-body">
+              <div class="text-right">
+              <a href="#" class="btn btn-default btn-block">
+                  タスクを追加する
+              </a>
+              </div>
+          </div>
+          <table class="table">
+              <thead>
+              <tr>
+              <th>タイトル</th>
+              <th>状態</th>
+              <th>期限</th>
+              <th></th>
+              </tr>
+              </thead>
+              <tbody>
+                <% @tasks.each do |task| %>
+                  <tr>
+                  <td><%= task.title %></td>
+                  <td><span class="label <%= status_class(task.status) %>"><%= status_label(task.status) %></span></td>
+                  <td><%= l(task.due_date, format: :default) %></td>
+                  <td><a href="#">編集</a></td>
+                  </tr>
+                <% end %>
+              </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
