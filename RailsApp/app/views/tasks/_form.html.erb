@@ -1,0 +1,37 @@
+<!-- form_withの場合、デフォルト非同期処理となる為、同期的に処理したい場合は「local: true」をつける必要がある-->
+<!-- 非同期処理状態だとコントローラー側でrenderをしても反応しない為、意図的に同期的に処理する必要がある-->
+<%= form_with model: task, url: task_url, local: true do |form| %>
+  <div class="form-group">
+      <%= form.label :title, 'タイトル' %><br>
+      <%= form.text_field :title, {class: "form-control"} %>
+      <% task.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+      <% end %>
+  </div>
+  <div class="form-group">
+      <%= form.label :status, '状態' %><br>
+      <%= form.select :status, status_label_only, {selected: 1}, { class: 'form-control' , required: true } %>
+      <% task.errors.full_messages_for(:status).each do |message| %>
+      <div><%= message %></div>
+      <% end %>
+  </div>
+  <div class="form-group">
+      <%= form.label :due_date, '期限' %><br>
+      <%= form.text_field :due_date, {id: "flatpickr", class: "form-control", readonly: "", value: task.due_date.nil? ? '' : l(task.due_date, format: :default)} %>
+      <% task.errors.full_messages_for(:due_date).each do |message| %>
+      <div><%= message %></div>
+      <% end %>
+  </div>
+  <div class="text-right">
+      <%= form.submit('送信', class: "btn btn-primary") %>
+  </div>
+<% end %>
+
+
+  <script>
+    flatpickr(document.getElementById('due_date'), {
+      locale: 'ja',
+      dateFormat: "Y/m/d",
+      minDate: new Date()
+    });
+  </script>

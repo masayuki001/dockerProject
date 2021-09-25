@@ -12,3 +12,20 @@
 //
 //= require rails-ujs
 //= require_tree .
+//= require turbolinks
+//= require jquery
+//= require jquery_ujs
+//= require flatpickr
+//= require flatpickr/l10n/ja
+
+document.addEventListener('turbolinks:load', () => {
+    // カレンダーの日本語化
+    flatpickr.localize(flatpickr.l10ns.ja)
+    // カレンダー表示
+    flatpickr('#flatpickr', {
+        locale: 'ja',
+        dateFormat: "Y/m/d",
+        minDate: new Date(),
+        disableMobile: true,
+    });
+})
